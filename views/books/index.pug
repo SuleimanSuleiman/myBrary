@@ -1,0 +1,22 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Mybrary
+    body 
+        include ../includes/header.pug
+        h3 Search Book 
+        form(action="/books" method='GET') 
+            label(for="title")
+            input(type="text" name='title' id='title' value=searchValue.title)
+            label(for="PublishedAfter") Published After
+            input(type="date" name='PublishedAfter' id='PublishedAfter' value=searchValue.PublishedAfter)
+            label(for="PublishedBefore") Published Before
+            input(type="date" name='PublishedBefore' id='PublishedBefore' value=searchValue.PublishedBefore)
+            button(type="submit") Search 
+            each book in books 
+                a(href=`/books/${book.id}`) 
+                    img(src=`/upload/${book.coverImageName}`, alt="")
+                    h2 #{book.title}

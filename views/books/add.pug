@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title myBrary
+    body 
+        include ../includes/header.pug
+        h3 New Book 
+        form(action="/books/add" method="post" enctype='multipart/form-data' id='form')
+            label(for="title") Title
+            input(type="text" id="title" name='title' value = book.title)
+            if(locals.errorMessage!=null&&locals.errorMessage!='')
+                h3 #{locals.errorMessage.title}
+            hr
+            label(for="author" ) Author 
+            select(name="author" )
+                each author in authors
+                    if(author.id === book.author) 
+                        option(value=author.id selected label=author.authorName) 
+                    else 
+                        option(value=author.id label=author.authorName)
+            if(locals.errorMessage != null && locals.errorMessage!= '')
+                h3 #{locals.errorMessage.author}
+            label(for="datePublished") Publish Date
+            input(type="date" name='datePublished' id='datePublished' value = book.datePublished!=null?book.datePublished.toISOString().split('T')[0]:'')
+            if(locals.errorMessage != null && locals.errorMessage != '')
+                h3 #{locals.errorMessage.datePublished}
+            hr
+            label(for="PageCount")
+            input(type="number" id ='PageCount' name='PageCount' value=book.PageCount)
+            if(locals.errorMessage != null && locals.errorMessage != '')
+                h3 #{locals.errorMessage.PageCount}
+            hr
+            input(type="file" name='file' )
+            hr
+            label(for="description") description
+            input(type="text" id="description" name='description' value = book.description)
+            if(locals.errorMessage != null && locals.errorMessage != '')
+                h3 #{locals.errorMessage.description}
+            hr
+            button(type='submit') Add 
+            a(href="/books") Cancel
+        //- script(src="/main_add_author.js") 

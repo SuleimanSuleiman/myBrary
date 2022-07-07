@@ -1,0 +1,24 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title MyBrary
+    body 
+        include ../includes/header.pug
+        div(style='width: 200px') 
+                    h3 #{book.title}
+                    hr
+                    h3 Author: #{book.author.authorName}
+                    hr
+                    h3 Publish Date: #{book.datePublished.toDateString()}
+                    hr
+                    h3 Page Count: #{book.PageCount}
+                    hr
+                    h3 Description: #{book.description}
+                    img(src=`./upload/${book.coverImageName}`, alt="known")
+                    hr
+                    a(href=`/books/${book.id}/edit`) Edit
+                    form(action=`/books/${book.id}?_method=DELETE` method="post")
+                        button(type="submit") Delete

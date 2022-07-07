@@ -1,0 +1,16 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Mybrary
+    body 
+        include ../includes/header.pug
+        h2 #{author.authorName}
+        a(href=`/authors/${author.id}/edit`) Edit
+        form(action=`/authors/${author.id}?_method=DELETE` method="post")
+            button(type="submit") Delete
+        each book in books 
+            a(href=`/books/${book.id}`) 
+                h3 #{book.title}

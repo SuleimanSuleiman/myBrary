@@ -1,0 +1,17 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title Mybrary
+    body 
+        include ../includes/header.pug
+        h3 Edit Author 
+        form(action=`/authors/${author.id}?_method=PUT` method="POST" id="form")
+            label(for="authorName")
+            input(type="text" name='authorName' value=author.authorName id='authorName')
+            if(locals.errorMessage != null && locals.errorMessage != '')
+                h4 #{locals.errorMessage}
+            button(type='submit') Edit
+            a(href=`/authors/${author.id}`) Cancel
